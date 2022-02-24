@@ -1,0 +1,380 @@
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP TABLE IF EXISTS `admin_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin_tbl` (
+  `Admin_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Firstname` varchar(50) NOT NULL,
+  `Middlename` varchar(50) NOT NULL,
+  `Lastname` varchar(50) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Password_Hash` varchar(1000) NOT NULL,
+  `Role` varchar(20) NOT NULL,
+  PRIMARY KEY (`Admin_ID`),
+  UNIQUE KEY `Username` (`Username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `announcement_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `announcement_tbl` (
+  `Announcement_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Date_Created` date NOT NULL,
+  `Annoucement_Title` varchar(50) NOT NULL,
+  `Announcement_Content` varchar(1000) NOT NULL,
+  `RRP_ID` int(11) NOT NULL,
+  `Announcement_Tag` varchar(10) NOT NULL,
+  `Time_Created` time NOT NULL,
+  `Date_Time` datetime DEFAULT NULL,
+  PRIMARY KEY (`Announcement_ID`),
+  KEY `RRP_ID` (`RRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `checklist_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `checklist_tbl` (
+  `Checklist_Id` int(11) NOT NULL AUTO_INCREMENT,
+  `User_ID` int(11) NOT NULL,
+  `RRP_ID` int(11) NOT NULL,
+  `Check_Status` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`Checklist_Id`),
+  KEY `User_ID` (`User_ID`),
+  KEY `RRP_ID` (`RRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `complaint_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `complaint_tbl` (
+  `Complaint_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `User_ID` int(11) NOT NULL,
+  `RRP_ID` int(11) NOT NULL,
+  `Complaint_Date` date NOT NULL,
+  `Complaint_Content` varchar(300) NOT NULL,
+  `Is_New` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`Complaint_ID`),
+  KEY `User_ID` (`User_ID`),
+  KEY `RRP_ID` (`RRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `contact_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contact_tbl` (
+  `Contact_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Contact_Number` varchar(11) NOT NULL,
+  `Contact_Name` varchar(45) NOT NULL,
+  `Contact_Type` varchar(45) NOT NULL,
+  `RRP_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Contact_ID`),
+  KEY `RRP_ID` (`RRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `conversation_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `conversation_tbl` (
+  `Conversation_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Receiver_A` int(11) NOT NULL,
+  `Receiver_B` int(11) NOT NULL,
+  `Type` varchar(20) NOT NULL,
+  `RRP_ID` int(11) NOT NULL,
+  `height` int(11) NOT NULL DEFAULT 0,
+  `Last_Edited` datetime NOT NULL,
+  `Deleted_From` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Conversation_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `error_report_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `error_report_tbl` (
+  `Report_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Report_Content` varchar(3000) NOT NULL,
+  `Date_Reported` datetime NOT NULL,
+  `Reporter_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Report_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `failed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `img_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `img_tbl` (
+  `IMG_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IMG_Filename` varchar(20) NOT NULL,
+  `Owner_ID` int(11) NOT NULL,
+  `Date_upload` date NOT NULL,
+  `IMG_Type` varchar(45) NOT NULL,
+  `Description` varchar(10000) NOT NULL,
+  `Type` varchar(20) NOT NULL,
+  `Title` varchar(30) NOT NULL,
+  PRIMARY KEY (`IMG_ID`),
+  UNIQUE KEY `IMG_Filename` (`IMG_Filename`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `message_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `message_tbl` (
+  `Message_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Conversation_ID` int(11) NOT NULL,
+  `From_ID` int(11) NOT NULL,
+  `Message_Content` varchar(500) NOT NULL,
+  `Date_Sent` datetime NOT NULL,
+  `Is_Read` tinyint(1) DEFAULT 0,
+  `Deleted_From` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Message_ID`),
+  KEY `Receiver_ID` (`From_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `notification_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notification_tbl` (
+  `Notification_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `User_ID` int(11) NOT NULL,
+  `Date_Notified` datetime NOT NULL,
+  `Type` varchar(50) NOT NULL,
+  `Notification_Content` varchar(100) NOT NULL,
+  `Destination_Link` varchar(100) NOT NULL,
+  `Is_Read` tinyint(1) NOT NULL DEFAULT 0,
+  `Extra_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Notification_ID`),
+  KEY `User_ID` (`User_ID`),
+  KEY `Destination_Link` (`Destination_Link`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `payment_history_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payment_history_tbl` (
+  `Payment_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `RRP_ID` int(11) NOT NULL,
+  `Tenant_ID` int(11) NOT NULL,
+  `Tenant_Name` varchar(100) NOT NULL,
+  `Date_Paid` date NOT NULL,
+  `Status` varchar(10) NOT NULL,
+  `Amount_Paid` double NOT NULL,
+  PRIMARY KEY (`Payment_ID`),
+  KEY `Tenant_ID` (`Tenant_ID`),
+  KEY `RRP_ID` (`RRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `personal_access_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `rating_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rating_tbl` (
+  `Rating_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `User_ID` int(11) NOT NULL,
+  `RRP_ID` int(11) NOT NULL,
+  `Rating_Value` int(11) NOT NULL,
+  `Review_Content` varchar(500) NOT NULL,
+  `Date_Rated` date NOT NULL,
+  PRIMARY KEY (`Rating_ID`),
+  KEY `User_ID` (`User_ID`),
+  KEY `RRP_ID` (`RRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `reservation_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reservation_tbl` (
+  `Reservation_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `User_ID` int(11) NOT NULL,
+  `RRP_ID` int(11) NOT NULL,
+  `Date_Reserve` date NOT NULL,
+  `Expiry_date` date NOT NULL,
+  `Reservation` varchar(45) NOT NULL,
+  `Status` varchar(10) NOT NULL DEFAULT 'pending',
+  `Is_New` tinyint(1) NOT NULL DEFAULT 1,
+  `Date_Scheduled` datetime DEFAULT NULL,
+  `Confirmation_Note` varchar(1000) NOT NULL,
+  `Deleted_From` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Reservation_ID`),
+  KEY `User_ID` (`User_ID`),
+  KEY `RRP_ID` (`RRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `reservation_update_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reservation_update_tbl` (
+  `Reservation_Update_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Reservation_ID` int(11) NOT NULL,
+  `Update_Content` varchar(300) NOT NULL,
+  `Update_Date` datetime NOT NULL,
+  PRIMARY KEY (`Reservation_Update_ID`),
+  KEY `Reservation_ID` (`Reservation_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `rrp_subscription_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rrp_subscription_tbl` (
+  `Subcription_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `User_ID` int(11) NOT NULL,
+  `Subcription_Start_Date` date NOT NULL,
+  `Subcription_End_Date` date NOT NULL,
+  `Subscription_Plan` varchar(20) NOT NULL,
+  PRIMARY KEY (`Subcription_ID`),
+  KEY `User_ID` (`User_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `rrp_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rrp_tbl` (
+  `RRP_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `RRP_Name` varchar(50) NOT NULL,
+  `RRP_Description` varchar(500) NOT NULL,
+  `RRP_Capacity` int(11) NOT NULL,
+  `RRP_Type` varchar(20) NOT NULL,
+  `RRP_Address` varchar(100) NOT NULL,
+  `RRP_Rent_Rate` double NOT NULL,
+  `RRP_X_Coordinates` double NOT NULL,
+  `RRP_Y_Coordinates` double NOT NULL,
+  `Owner_ID` int(11) NOT NULL,
+  `Contact_Number` varchar(11) NOT NULL,
+  `RRP_Settings` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`RRP_Settings`)),
+  `Photo_Documents` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`Photo_Documents`)),
+  PRIMARY KEY (`RRP_ID`),
+  KEY `Owner_ID` (`Owner_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `tenant_boarded_rrp_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tenant_boarded_rrp_tbl` (
+  `Tbr_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Tenant_ID` int(11) NOT NULL,
+  `RRP_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Tbr_ID`),
+  KEY `Tenant_ID` (`Tenant_ID`),
+  KEY `RRP_ID` (`RRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `tenant_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tenant_tbl` (
+  `User_ID` int(11) NOT NULL,
+  `RRP_ID` int(11) NOT NULL,
+  `Room_Name` varchar(45) NOT NULL,
+  `Payment_Status` varchar(20) NOT NULL,
+  `Payment_Day` int(11) NOT NULL,
+  `Date_Added` date NOT NULL,
+  `Time_Added` time NOT NULL,
+  UNIQUE KEY `User_ID` (`User_ID`) USING BTREE,
+  KEY `RRP_ID` (`RRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `user_profile_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_profile_tbl` (
+  `User_ID` int(11) NOT NULL,
+  `Occupation` varchar(100) NOT NULL,
+  `Work_Address` varchar(200) NOT NULL,
+  `Highest_Education` varchar(200) NOT NULL,
+  `School_Name` varchar(200) NOT NULL,
+  `School_Address` varchar(200) NOT NULL,
+  `Guardian_Name` varchar(100) NOT NULL,
+  `Contact_Number` int(11) DEFAULT NULL,
+  `Relationship` varchar(30) NOT NULL,
+  `Address` varchar(200) NOT NULL,
+  UNIQUE KEY `User_ID` (`User_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `user_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_tbl` (
+  `User_List_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Firstname` varchar(20) NOT NULL,
+  `Middlename` varchar(20) NOT NULL,
+  `Lastname` varchar(20) NOT NULL,
+  `Birthdate` date DEFAULT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Address` varchar(100) DEFAULT NULL,
+  `Contact_number` varchar(11) DEFAULT NULL,
+  `User_type` varchar(15) NOT NULL,
+  `Username` varchar(20) DEFAULT NULL,
+  `Password_Hash` varchar(200) DEFAULT NULL,
+  `Is_Boarded` tinyint(1) NOT NULL,
+  `Registered_By` varchar(15) NOT NULL DEFAULT 'self',
+  `Privacy` varchar(6) NOT NULL DEFAULT '111111',
+  PRIMARY KEY (`User_List_ID`),
+  UNIQUE KEY `Email` (`Email`),
+  UNIQUE KEY `Contact_number` (`Contact_number`),
+  UNIQUE KEY `Username` (`Username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+INSERT INTO `migrations` VALUES (1,'2014_10_12_100000_create_password_resets_table',1);
+INSERT INTO `migrations` VALUES (2,'2019_08_19_000000_create_failed_jobs_table',1);
+INSERT INTO `migrations` VALUES (3,'2019_12_14_000001_create_personal_access_tokens_table',1);
