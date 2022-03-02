@@ -26,3 +26,7 @@ Route::get('/token', function (Request $request) {
 Route::get('/testing', function() {
     return Admin::find(1);
 });
+
+Route::get("/mail", function() {
+    return new App\Mail\VerificationMail(123445, 'Bellie Joe Jandusay');
+});

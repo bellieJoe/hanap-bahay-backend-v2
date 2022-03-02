@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RRP extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = "rrp_tbl";
     protected $primaryKey = "rrp_id";
     protected $guarded = [];

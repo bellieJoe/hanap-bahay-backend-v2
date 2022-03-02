@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Announcement extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = "announcement_tbl";
     protected $primaryKey = "announcement_id";
     protected $guarded = [];
