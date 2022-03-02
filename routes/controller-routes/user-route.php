@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('users')->group(function(){
     Route::get('', function(){
-        return User::get();
+        // return User::get();
     });
 
     Route::post('', [UserController::class, 'createNewUser']);
@@ -16,7 +16,12 @@ Route::prefix('users')->group(function(){
     Route::get('is-distinct', [UserController::class, 'isDistinct']);
     
     Route::prefix('{id}')->group(function(){
+
+        Route::get('', [UserController::class, 'getUserDetails']);
+
         Route::get('getFullName', [UserController::class, "getFullName"]);
+
+        Route::post('update', [UserController::class, 'updateUser']);
 
         Route::post('create-user-profile', [UserController::class, 'createUserProfile']);
     });
@@ -28,10 +33,6 @@ Route::prefix('users')->group(function(){
     Route::post('send-code', [UserController::class, 'sendVerificationCode']);
 
     Route::post('update-user-details-walkin',[UserController::class, 'updateUserDetails_Walkin']);
-
-
-    
-    
 });
 
 ?>

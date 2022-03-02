@@ -15,6 +15,9 @@ use Illuminate\Http\Request;
 |
 */
 require('controller-routes/user-route.php');
+require('controller-routes/rrpsubscription-route.php');
+require('controller-routes/rrp-route.php');
+require('controller-routes/user-profile-route.php');
 
 // Route::get('/', function () {
 //     return "This is the backend for hanapbahay";

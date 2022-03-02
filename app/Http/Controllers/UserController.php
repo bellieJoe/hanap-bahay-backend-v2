@@ -82,5 +82,33 @@ class UserController extends Controller
         ]);
     }
 
-    
+    public function getUserDetails($id){
+        $user = User::where(['User_List_ID' => $id])
+                ->get();
+        
+        return json_encode($user);
+    }
+
+    public function updateUser($id, Request $request){
+        if($request->input('uniq') == 0){
+            User::where([
+                'User_List_ID' => $id
+            ])
+            ->update([
+                'Firstname' => $request->input('Firstname'),
+                'Middlename' => $request->input('Middlename'),
+                'Lastname' => $request->input('Lastname'),
+                'Address' => $request->input('Address'),
+                'Birthdate' => $request->input('Birthdate'),
+            ]);
+        }else{
+            User::where([       
+                'User_List_ID' => $id
+            ])
+            ->update([
+                'Contact_number' => $request->input('Contact_Number')
+            ]);
+        }
+    }
+
 }

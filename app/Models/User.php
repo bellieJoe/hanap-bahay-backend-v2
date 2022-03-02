@@ -18,6 +18,7 @@ class User extends Authenticatable
     protected $primaryKey = "user_list_id";
     protected $guarded = [];
     protected $appends = ['User_ID', 'User_Type'];
+    protected $hidden = ['Password_Hash'];
 
     protected function getUserIDAttribute()  {
         return $this->attributes['User_List_ID'];
