@@ -65,7 +65,8 @@ class UserController extends Controller
 
     public function searchUser($username){
         $user = User::where(['username' => $username])->get();
-        $user[0]->User_ID = $user[0]->User_List_ID;
+        // $user[0]->User_ID = $user[0]->User_List_ID;
+        // $user[0]->User_type = $user[0]->User_Type;
         return json_encode($user);
     }
 
