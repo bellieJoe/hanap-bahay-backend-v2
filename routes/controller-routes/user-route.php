@@ -24,6 +24,14 @@ Route::prefix('users')->group(function(){
         Route::post('update', [UserController::class, 'updateUser']);
 
         Route::post('create-user-profile', [UserController::class, 'createUserProfile']);
+
+        Route::post('auth', [UserController::class, 'confirmPassword']);
+
+        Route::post('change-password', [UserController::class, 'changePassword']);
+
+        Route::post('update-privacy', [UserController::class, 'updatePrivacy']);
+
+        Route::get('tenant-info', [UserController::class, 'getTenantInfo']);
     });
 
     Route::prefix('{username}')->group(function(){
@@ -33,6 +41,21 @@ Route::prefix('users')->group(function(){
     Route::post('send-code', [UserController::class, 'sendVerificationCode']);
 
     Route::post('update-user-details-walkin',[UserController::class, 'updateUserDetails_Walkin']);
-});
 
+    Route::prefix('search')->group(function(){
+        Route::get('tenant-firstname', [UserController::class, 'searchTenantFirstname']);
+
+        Route::get('tenant-2name', [UserController::class, 'searchTenant2Name']);
+
+        Route::get('tenant-3name', [UserController::class, 'searchTenant3Name']);
+
+        Route::get('tenant-4name', [UserController::class, 'searchTenant4Name']);
+    });
+
+    Route::get('email/check-registered-email', [UserController::class, 'checkIfRegisteredEmail']);
+
+    Route::post('email/send-tenant-verification', [UserController::class, 'sendTenantVerificationMail']);
+
+    Route::post('register-tenant', [UserController::class, 'registerTenant']);
+});
 ?>

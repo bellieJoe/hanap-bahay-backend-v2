@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TenantVerificationMail;
 use App\Mail\VerificationMail;
 use App\Models\User;
 use App\Models\UserProfile;
@@ -109,6 +110,227 @@ class UserController extends Controller
                 'Contact_number' => $request->input('Contact_Number')
             ]);
         }
+    }
+
+    public function confirmPassword($id, Request $req){
+        $passsword = User::where([
+            'User_List_ID' => $id
+        ])->first()->Password_Hash;
+
+        if($passsword === $req->input('pass')){
+            return json_encode(1);
+        }else{
+            return json_encode(0);
+        }
+    }
+
+    public function changePassword($id, Request $req){
+        $user = User::where([
+            'User_List_ID' => $id
+        ]);
+        if($user->first()->Password_Hash == $req->input('oldpass')){
+            $user->update([
+                'Password_Hash' => $req->input('newpass')
+            ]);
+            return json_encode(1);
+        }else{
+            return json_encode(0);
+        }
+    }
+
+    public function updatePrivacy($id, Request $req){
+        User::where([
+            'User_List_ID' => $id
+        ])
+        ->update([
+            'Privacy' => $req->input('Settings')
+        ]);
+    }
+
+    public function searchTenantFirstname(Request $req){
+
+        $tenant = User::where([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Firstname', 'like', $req->input('name')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Middlename', 'like', $req->input('name')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Lastname', 'like', $req->input('name')."%"]
+        ])
+        ->orderBy('Firstname', 'asc')
+        ->get(); 
+
+
+        return json_encode($tenant);
+    }
+
+    public function searchTenant2Name(Request $req){
+        $tenant = User::where([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Firstname', 'like', $req->input('name1')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Firstname', 'like', $req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Firstname', 'like', $req->input('name1')." ".$req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Middlename', 'like', $req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Middlename', 'like', $req->input('name1')." ".$req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Lastname', 'like', $req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Lastname', 'like', $req->input('name1')." ".$req->input('name2')."%"]
+        ])
+        ->orderBy('Firstname', 'asc')
+        ->get(); 
+
+
+        return json_encode($tenant);
+    }
+
+    public function searchTenant3Name(Request $req){
+        $tenant = User::where([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Firstname', 'like', $req->input('name1')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Firstname', 'like', $req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Firstname', 'like', $req->input('name1')." ".$req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Middlename', 'like', $req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Middlename', 'like', $req->input('name2')." ".$req->input('name3')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Lastname', 'like', $req->input('name3')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Lastname', 'like', $req->input('name2')." ".$req->input('name3')."%"]
+        ])
+        ->orderBy('Firstname', 'asc')
+        ->get(); 
+
+
+        return json_encode($tenant);
+    }
+
+    public function searchTenant4Name(Request $req){
+        $tenant = User::where([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Firstname', 'like', $req->input('name1')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Firstname', 'like', $req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Firstname', 'like', $req->input('name1')." ".$req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Middlename', 'like', $req->input('name2')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Middlename', 'like', $req->input('name2')." ".$req->input('name3')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Lastname', 'like', $req->input('name3')."%"]
+        ])
+        ->orWhere([
+            ['User_type' , 'tenant'],
+            ['Is_Boarded' , 0],
+            ['Lastname', 'like', $req->input('name3')." ".$req->input('name4')."%"]
+        ])
+        ->orderBy('Firstname', 'asc')
+        ->get(); 
+
+
+        return json_encode($tenant);
+    }
+
+    public function getTenantInfo($id){
+        $user = User::where(['User_List_ID' => $id])
+        ->get();
+
+        // $user->User_ID = $user->User_List_ID;
+
+        return json_encode($user);
+    }
+
+    public function checkIfRegisteredEmail(Request $req){
+        $user = User::where([
+            'Email' => $req->input('Email')
+        ])->get();
+
+        return json_encode($user);
+    }
+
+    public function sendTenantVerificationMail(Request $req){
+        Mail::to($req->Receiver_Email)->send(new TenantVerificationMail($req->Owner_Email, $req->Receiver_Email, $req->Sender_Name, $req->Receiver_Name));
+    }
+
+    public function registerTenant(Request $req){
+        User::create([
+            'Firstname' => $req->Firstname,
+            'Middlename' => $req->Middlename,
+            'Lastname' => $req->Lastname,
+            'Email' => $req->Email,
+            'User_Type' => 'tenant',
+            'Is_Boarded' => '1',
+            'Registered_By' => 'property owner'
+        ]);
     }
 
 }

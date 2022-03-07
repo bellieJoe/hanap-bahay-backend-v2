@@ -12,4 +12,9 @@ class Announcement extends Model
     protected $table = "announcement_tbl";
     protected $primaryKey = "announcement_id";
     protected $guarded = [];
+    protected $appends = ['Announcement_Title'];
+
+    protected function getAnnouncementTitleAttribute(){
+        return $this->attributes['Annoucement_Title'];
+    }
 }

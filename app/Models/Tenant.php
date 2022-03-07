@@ -10,5 +10,6 @@ class Tenant extends Model
     public $timestamps = false;
     use HasFactory;
     protected $table = "tenant_tbl";
+    // protected $primaryKey = "user_id";
     protected $guarded = [];
 }

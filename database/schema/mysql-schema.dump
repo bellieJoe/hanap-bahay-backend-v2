@@ -323,7 +323,7 @@ CREATE TABLE `tenant_tbl` (
   `Payment_Day` int(11) DEFAULT NULL,
   `Date_Added` date DEFAULT NULL,
   `Time_Added` time DEFAULT NULL,
-  UNIQUE KEY `User_ID` (`User_ID`) USING BTREE,
+  KEY `User_ID` (`User_ID`) USING BTREE,
   KEY `RRP_ID` (`RRP_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
