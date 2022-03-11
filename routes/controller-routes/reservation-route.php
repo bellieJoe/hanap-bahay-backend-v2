@@ -17,6 +17,8 @@ Route::prefix('reservations')->group(function(){
     Route::get('get-reservations-rrp/{rrpId}', [ReservationController::class, 'getReservationPerRRP']);
 
     Route::get('get-reservations-id/{reservationId}', [ReservationController::class, 'getReservationPerId']);
+
+    Route::get('count-new/{rrpId}', [ReservationController::class, 'countNew']);
 });
 
 ?>

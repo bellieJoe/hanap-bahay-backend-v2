@@ -31,6 +31,7 @@ require('controller-routes/complaint-route.php');
 require('controller-routes/reservation-route.php');
 require('controller-routes/checklist-route.php');
 require('controller-routes/reservation-update-route.php');
+require('controller-routes/notification-route.php');
 
 
 Route::get('/token', function (Request $request) {

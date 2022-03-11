@@ -13,6 +13,8 @@ Route::prefix('tenants')->group(function(){
     Route::get('count/{rrpId}', [TenantController::class, 'countTenant']);
     
     Route::post('unboard-tenants', [TenantController::class, 'unboardTenants']);
+
+    Route::get('get-tenant-by-userid/{userId}', [TenantController::class, 'getTenantByUserId']);
 });
 
 ?>

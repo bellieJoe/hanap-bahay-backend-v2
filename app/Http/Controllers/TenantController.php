@@ -65,4 +65,12 @@ class TenantController extends Controller
         }
     }
 
+    public function getTenantByUserId($userId){
+        $tenants = Tenant::where([
+            'User_ID' => $userId
+        ])->get();
+
+        return json_encode($tenants);
+    }
+
 }

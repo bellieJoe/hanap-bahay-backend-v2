@@ -83,4 +83,13 @@ class ReservationController extends Controller
 
 
     }
+
+    public function countNew($rrpId){
+        $count = Reservation::where([
+            'RRP_ID' => $rrpId,
+            'Status' => 'pending'
+        ])->count();
+
+        return json_encode($count);
+    }
 }

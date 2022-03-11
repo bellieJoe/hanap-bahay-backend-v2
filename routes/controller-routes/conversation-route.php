@@ -14,6 +14,20 @@ Route::prefix('conversations')->group(function(){
     Route::prefix('{conversationId}')->group(function(){
         Route::get('', [ConversationController::class, 'getConversation']);
     });
+
+    Route::get('convo/check-exist', [ConversationController::class, 'checkIfExist']);
+
+    Route::post('convo/create', [ConversationController::class, 'create']);
+
+    Route::post('convo/delete', [ConversationController::class, 'delete']);
+
+    Route::get('convo/check-new-message-by-user/{userId}', [ConversationController::class, 'checkNewMessageByUser']);
+
+    Route::get('convo/check-new-message-by-rrp/{rrpId}', [ConversationController::class, 'checkNewMessageByRRP']);
+
+    Route::get('convo/count-new-messages/{conversationId}/{userId}', [ConversationController::class, 'countNewMessages']);
+
+    Route::post('message/mark-read', [ConversationController::class, 'markRead']);
 })
 
 ?>
