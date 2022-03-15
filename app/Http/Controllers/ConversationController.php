@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conversation;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Nette\Utils\Json;
 
 class ConversationController extends Controller
 {
@@ -162,4 +163,31 @@ class ConversationController extends Controller
             'Is_Read' => 1
         ]);
     }
+
+    public function getConvoByUserID($userId){
+        $conversations = Conversation::where([
+            'Receiver_A' => $userId,
+        ])
+        ->orWhere([
+            'Receiver_B' => $userId
+        ])
+        ->orderBy('Last_Edited', 'desc')
+        ->get();
+
+        $filledConvo = [];
+        foreach ($conversations as $convo) {
+            $count = Message::where([
+                'Conversation_ID' => $convo->Conversation_ID
+            ])->count();
+
+            if($count > 0){
+                array_push($filledConvo, $convo);
+            }
+        }
+
+        return json_encode($filledConvo);
+
+    }
+
+
 }

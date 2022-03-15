@@ -49,4 +49,14 @@ class PaymentHistoryController extends Controller
             'Amount_Paid' => $req->Amount_Paid
         ]);
     }
+
+    public function getPaymentByUser(Request $req){
+        $payments = PaymentHistory::where([
+            'Tenant_ID' => $req->uid,
+            'RRP_ID' => $req->rrpid,
+            ['Date_Paid' => 'like', $req->date],
+         ])->get();
+
+         return json_encode($payments);
+    }
 }

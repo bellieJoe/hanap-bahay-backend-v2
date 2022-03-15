@@ -28,7 +28,7 @@ class RRPController extends Controller
     }
 
     public function getRRP($rrpId){
-        $rrp = RRP::where(['RRP_ID' => $rrpId])->get();
+        $rrp = RRP::where(['RRP_ID' => $rrpId])->first();
 
         return json_encode($rrp);
     }
@@ -76,7 +76,7 @@ class RRPController extends Controller
     }
 
     public function getRRPs(){
-        $rrps = RRP::all()->orderBy('RRP_ID', 'asc');
+        $rrps = RRP::all();
 
         return json_encode($rrps);
     }

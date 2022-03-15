@@ -28,6 +28,8 @@ Route::prefix('conversations')->group(function(){
     Route::get('convo/count-new-messages/{conversationId}/{userId}', [ConversationController::class, 'countNewMessages']);
 
     Route::post('message/mark-read', [ConversationController::class, 'markRead']);
-})
+
+    Route::get('get-convo-user-id/{userId}', [ConversationController::class, 'getConvoByUserID']);
+});
 
 ?>

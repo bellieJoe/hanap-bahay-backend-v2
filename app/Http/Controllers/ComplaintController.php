@@ -29,4 +29,27 @@ class ComplaintController extends Controller
 
         return json_encode($complaints);
     }
+
+    public function create(Request $req){
+        Complaint::create([
+            'User_ID' => $req->uid,
+            'RRP_ID' => $req->rrpid,
+            'Complaint_Date' => $req->date,
+            'Complaint_Content' => $req->content
+        ]);
+    }
+
+    public function markRead(Request $req){
+        Complaint::where([
+            'Complaint_ID' => $req->com_id
+        ]);
+    }
+
+    public function countComplaintsByRRP($rrpId){
+        $count = Complaint::where([
+            'RRP_ID' => $rrpId
+        ])->count();
+
+        return json_encode($count);
+    }
 }

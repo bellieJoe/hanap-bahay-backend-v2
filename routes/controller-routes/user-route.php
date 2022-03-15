@@ -34,9 +34,7 @@ Route::prefix('users')->group(function(){
         Route::get('tenant-info', [UserController::class, 'getTenantInfo']);
     });
 
-    Route::prefix('{username}')->group(function(){
-        Route::get('', [UserController::class, 'searchUser']);
-    });
+    Route::get('get-user-by-username/{username}', [UserController::class, 'searchUser']);
 
     Route::post('send-code', [UserController::class, 'sendVerificationCode']);
 

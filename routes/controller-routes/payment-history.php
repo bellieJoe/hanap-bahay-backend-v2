@@ -14,6 +14,8 @@ Route::prefix('payment-history')->group(function(){
     Route::get('get-payment/{paymentId}', [PaymentHistoryController::class, 'getPayment']);
 
     Route::post('update-payment/{paymentId}', [PaymentHistoryController::class, 'updatePayment']);
+
+    Route::get('get-payments-by-user', [PaymentHistoryController::class, 'getPaymentByUser']);
 });
 
 ?>
