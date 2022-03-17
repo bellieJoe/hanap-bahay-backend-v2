@@ -17,7 +17,7 @@ class User extends Authenticatable
     protected $table = "user_tbl";
     protected $primaryKey = "user_list_id";
     protected $guarded = [];
-    protected $appends = ['User_ID', 'User_Type', 'Password'];
+    protected $appends = ['User_ID', 'User_Type', 'Password', 'Contact_Number'];
     // protected $hidden = ['Password_Hash'];
 
     protected function getUserIDAttribute()  {
@@ -28,5 +28,8 @@ class User extends Authenticatable
     }
     protected function getPasswordAttribute()  {
         return $this->attributes['Password_Hash'];
+    }
+    protected function getContactNumberAttribute()  {
+        return $this->attributes['Contact_number'];
     }
 }

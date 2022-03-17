@@ -25,7 +25,7 @@ class ContactController extends Controller
     }
 
     public function getContact($id){
-        $contact = Contact::where(['Contact_ID' => $id])->get();
+        $contact = Contact::where(['Contact_ID' => $id])->first();
 
         return json_encode($contact);
     }
