@@ -84,8 +84,7 @@ class UserController extends Controller
     }
 
     public function getUserDetails($id){
-        $user = User::where(['User_List_ID' => $id])
-                ->get();
+        $user = User::where(['User_List_ID' => $id])->get();
         
         return json_encode($user);
     }

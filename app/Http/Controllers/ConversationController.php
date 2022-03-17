@@ -35,7 +35,7 @@ class ConversationController extends Controller
         $convo = Conversation::where([
             'Conversation_ID' => $conversationId
         ])
-        ->get();
+        ->first();
 
         return json_encode($convo);
     }
