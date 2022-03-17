@@ -17,6 +17,8 @@ Route::prefix('rrps')->group(function(){
     Route::post('delete/{rrpId}', [RRPController::class, 'delete']);
 
     Route::get('get-rrps', [RRPController::class, 'getRRPs']);
+
+    Route::get('get-rrps-by-owner/{ownerId}', [RRPController::class, 'getRRPByOwner']);
 });
 
 ?>

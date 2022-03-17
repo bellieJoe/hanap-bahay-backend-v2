@@ -80,4 +80,13 @@ class RRPController extends Controller
 
         return json_encode($rrps);
     }
+
+    public function getRRPByOwner($ownerId){
+        $RRP = RRP::where([
+            'Owner_ID' => $ownerId
+        ])
+        ->get();
+
+        return json_encode($RRP);
+    }
 }

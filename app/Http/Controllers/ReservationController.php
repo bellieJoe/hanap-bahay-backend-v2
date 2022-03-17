@@ -51,7 +51,7 @@ class ReservationController extends Controller
         $reservations = Reservation::where([
             'Reservation_ID' => $reservationId
         ])
-        ->get();
+        ->first();
 
         return json_encode($reservations);
     }
