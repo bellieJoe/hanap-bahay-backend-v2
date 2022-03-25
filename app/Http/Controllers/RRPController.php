@@ -23,8 +23,10 @@ class RRPController extends Controller
             'Owner_ID' => $ownerId,
             'Contact_Number' => $request->input('Contact_Number'),
             'RRP_Settings' => $request->input('RRP_Settings'),
-            'Photo_Documents' => $request->input('Photo_Documents')
+            'Photo_Documents' => $request->input('Photo_Documents'),
+            'Business_Registration_No' => $request->Business_Registration_No
         ]);
+        return $request;
     }
 
     public function getRRP($rrpId){
