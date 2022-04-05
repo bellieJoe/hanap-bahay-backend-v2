@@ -41,7 +41,7 @@ Route::get('/token', function (Request $request) {
 });
 
 Route::get('/testing', function() {
-    return User::all()->pluck('User_List_ID');
+    return "This is testing";
 });
 
 Route::get("/mail", function() {
