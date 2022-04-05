@@ -1,2 +1,3 @@
-web: php artisan schedule:work
 web: php artisan storage:link
+web: php artisan schedule:work
+
