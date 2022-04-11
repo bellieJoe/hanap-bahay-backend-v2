@@ -14,4 +14,15 @@ class RRPTypeController extends Controller
 
         return json_encode($count);
     }   
+
+    public function create(Request $req) {
+        RRPType::create([
+            'RRP_ID' => $req->RRP_ID,
+            'RRP_Type' => $req->RRP_Type,
+            'Basic_Rent' => $req->Basic_Rent,
+            'Capacity' => $req->Capacity,
+            'Description' => $req->Description,
+            'Miscellaneous' => $req->Miscellaneous
+        ]);
+    }
 }
