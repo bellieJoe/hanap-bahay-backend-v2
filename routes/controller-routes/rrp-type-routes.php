@@ -11,6 +11,8 @@ Route::prefix('rrp-types')->group(function(){
     Route::post('create', [RRPTypeController::class, 'create']);
 
     Route::get('get-by-rrpId/{rrpId}', [RRPTypeController::class, 'getByRRP_ID']);
+
+    Route::get('get-by-id/{id}', [RRPTypeController::class, 'getById']);
     
 });
 

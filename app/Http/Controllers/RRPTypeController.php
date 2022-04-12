@@ -33,4 +33,10 @@ class RRPTypeController extends Controller
 
         return $rrpTypes;
     }
+
+    public function getById($id){
+        return RRPType::where([
+            'RRP_Type_ID' => $id
+        ])->first();
+    }
 }
