@@ -10,10 +10,12 @@ Route::prefix('rrp-types')->group(function(){
 
     Route::post('create', [RRPTypeController::class, 'create']);
 
+    Route::post('update', [RRPTypeController::class, 'update']);
+
     Route::get('get-by-rrpId/{rrpId}', [RRPTypeController::class, 'getByRRP_ID']);
 
     Route::get('get-by-id/{id}', [RRPTypeController::class, 'getById']);
-    
+
 });
 
 ?>

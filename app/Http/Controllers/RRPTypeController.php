@@ -39,4 +39,17 @@ class RRPTypeController extends Controller
             'RRP_Type_ID' => $id
         ])->first();
     }
+
+    public function update(Request $req){
+        RRPType::where([
+            'RRP_Type_ID' => $req->RRP_Type_ID
+        ])
+        ->update([
+            'RRP_Type' => $req->RRP_Type,
+            'Basic_Rent' => $req->Basic_Rent,
+            'Capacity' => $req->Capacity,
+            'Description' => $req->Description,
+            'Miscellaneous' => $req->Miscellaneous
+        ]);
+    }
 }
