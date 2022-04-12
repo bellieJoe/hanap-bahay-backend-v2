@@ -25,4 +25,12 @@ class RRPTypeController extends Controller
             'Miscellaneous' => $req->Miscellaneous
         ]);
     }
+
+    public function getByRRP_ID($rrpId){
+        $rrpTypes = RRPType::where([
+            'RRP_ID' => $rrpId
+        ])->get();
+
+        return $rrpTypes;
+    }
 }
