@@ -3,8 +3,10 @@
 use App\Mail\TenantVerificationMail;
 use App\Models\Admin;
 use App\Models\User;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,8 +43,10 @@ Route::get('/token', function (Request $request) {
     return json_encode($request->session()->token());
 });
 
-Route::get('/testing', function() {
-    return User::all()->pluck('User_List_ID');
+Route::get('/testing', function(Request $req) {
+
+    return Response::json(["sa"], 404);
+
 });
 
 Route::get("/mail", function() {
