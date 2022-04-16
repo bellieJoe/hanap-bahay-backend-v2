@@ -8,6 +8,7 @@ use App\Models\RRP;
 use App\Models\Tenant;
 use App\Models\TenantBoardedRRP;
 use App\Models\User;
+use App\Models\UserProfile;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -58,6 +59,10 @@ class TenantController extends Controller
             $Tenant = User::where([
                 'Email' => $req->Email
             ])->first();
+
+            UserProfile::create([
+                "User_ID" => $Tenant->User_List_ID
+            ]);
 
             Mail::to($req->Email)->send(new TenantVerificationMail($Owner->Email, $req->Email, $Owner->Firstname." ".$Owner->Lastname, null));
 

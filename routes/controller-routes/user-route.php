@@ -55,5 +55,7 @@ Route::prefix('users')->group(function(){
     Route::post('email/send-tenant-verification', [UserController::class, 'sendTenantVerificationMail']);
 
     Route::post('register-tenant', [UserController::class, 'registerTenant']);
+
+    Route::get("username/check-username/{username}", [UserController::class, 'checkUsernameByUsername']);
 });
 ?>
