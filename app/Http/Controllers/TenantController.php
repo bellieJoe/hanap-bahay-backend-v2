@@ -60,9 +60,9 @@ class TenantController extends Controller
                 'Email' => $req->Email
             ])->first();
 
-            UserProfile::create([
-                "User_ID" => $Tenant->User_List_ID
-            ]);
+            // UserProfile::create([
+            //     "User_ID" => $Tenant->User_List_ID
+            // ]);
 
             Mail::to($req->Email)->send(new TenantVerificationMail($Owner->Email, $req->Email, $Owner->Firstname." ".$Owner->Lastname, null));
 

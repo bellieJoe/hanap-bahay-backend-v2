@@ -44,7 +44,6 @@ class UserController extends Controller
     public function createuserProfile($id){
         UserProfile::create([
             'User_ID' => $id,
-            
         ]);
     }
 
@@ -76,6 +75,9 @@ class UserController extends Controller
             'Email' =>  $request->input('Email')
         ])
         ->update([
+            'Firstname' => $request->Firstname,
+            'Middlename' => $request->Middlename,
+            'Lastname' => $request->Lastname,
             'Birthdate' => $request->input('Birthdate'),
             'Address' => $request->input('Address'),
             'Contact_number' => $request->input('Contact_Number'),
