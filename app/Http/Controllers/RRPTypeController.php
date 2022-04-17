@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RRPType;
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 
 class RRPTypeController extends Controller
@@ -31,13 +32,29 @@ class RRPTypeController extends Controller
             'RRP_ID' => $rrpId
         ])->get();
 
-        return $rrpTypes;
+        $response = [];
+
+        foreach ($rrpTypes as $rrpType) {
+            $rrpType->Tenant_Count = Tenant::where([
+                'RRP_Type_ID' => $rrpType->RRP_Type_ID
+            ])
+            ->count();
+            array_push($response, $rrpType);
+        }
+
+        return $response;
     }
 
     public function getById($id){
-        return RRPType::where([
+        $rrpType = RRPType::where([
             'RRP_Type_ID' => $id
         ])->first();
+
+        $rrpType->Tenant_Count = Tenant::where([
+            'RRP_Type_ID' => $rrpType->RRP_Type_ID
+        ])
+        ->count();
+        return $rrpType;
     }
 
     public function update(Request $req){
@@ -51,5 +68,23 @@ class RRPTypeController extends Controller
             'Description' => $req->Description,
             'Miscellaneous' => $req->Miscellaneous
         ]);
+    }
+
+    public function getRRPTypeAvailability($rrpTypeId){
+        $tenantCount = Tenant::where([
+            'RRP_Type_ID' => $rrpTypeId
+        ])
+        ->count();
+
+        $RRPType = RRPType::where([
+            'RRP_Type_ID' => $rrpTypeId
+        ])->first();
+
+        if($RRPType->capacity > $tenantCount){
+            return "available";
+        }
+        else {
+            return "unavailable";
+        }
     }
 }

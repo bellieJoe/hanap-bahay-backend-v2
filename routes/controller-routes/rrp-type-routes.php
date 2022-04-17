@@ -16,6 +16,8 @@ Route::prefix('rrp-types')->group(function(){
 
     Route::get('get-by-id/{id}', [RRPTypeController::class, 'getById']);
 
+    Route::get('get-availability/{id}', [RRPTypeController::class, 'getRRPTypeAvailability']);
+
 });
 
 ?>
