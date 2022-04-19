@@ -4,6 +4,7 @@ use App\Mail\TenantVerificationMail;
 use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -37,6 +38,7 @@ require('controller-routes/notification-route.php');
 require('controller-routes/img-route.php');
 require('controller-routes/message-route.php');
 require('controller-routes/rrp-type-routes.php');
+require('controller-routes/rrp-billing-route.php');
 
 
 Route::get('/token', function (Request $request) {
@@ -44,9 +46,7 @@ Route::get('/token', function (Request $request) {
 });
 
 Route::get('/testing', function(Request $req) {
-
-    return Response::json(["sa"], 404);
-
+    return Carbon::now()->format("d");
 });
 
 Route::get("/mail", function() {

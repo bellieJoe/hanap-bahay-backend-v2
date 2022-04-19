@@ -73,7 +73,8 @@ class TenantController extends Controller
             'RRP_ID' => $req->input('rrpid'),
             'RRP_Type_ID' => $req->input('RRP_Type_ID'),
             'Date_Added' => $req->input('date'), 
-            'Time_Added' => $req->input('time')
+            'Time_Added' => $req->input('time'),
+            'Payment_Day' => $req->Payment_Day
         ]);
 
         User::where([

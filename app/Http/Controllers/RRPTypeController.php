@@ -54,6 +54,7 @@ class RRPTypeController extends Controller
             'RRP_Type_ID' => $rrpType->RRP_Type_ID
         ])
         ->count();
+        
         return $rrpType;
     }
 
