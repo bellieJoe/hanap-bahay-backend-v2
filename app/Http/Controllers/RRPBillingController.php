@@ -32,4 +32,23 @@ class RRPBillingController extends Controller
 
         return $Invoice;
     }
+
+    public function updateStatus(Request $req){
+        RRPBilling::where([
+            'Bill_ID' => $req->Bill_ID
+        ])
+        ->update([
+            'Status' => $req->Status
+        ]);
+    }
+
+    public function updatePayment(Request $req){
+        RRPBilling::where([
+            'Bill_ID' => $req->Bill_ID
+        ])
+        ->update([
+            'Amount_Paid' => $req->Amount_Paid,
+            'Status' => $req->Status
+        ]);
+    }
 }

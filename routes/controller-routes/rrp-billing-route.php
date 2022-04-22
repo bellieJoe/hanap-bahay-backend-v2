@@ -9,6 +9,10 @@ Route::prefix('invoices')->group(function(){
 
     Route::get('get-by-id/{id}', [RRPBillingController::class, 'getInvoiceByID']);
 
+    Route::post('update-status', [RRPBillingController::class, 'updateStatus']);
+
+    Route::post('update-payment', [RRPBillingController::class, 'updatePayment']);
+
 });
 
 ?>

@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\RRP;
 use App\Models\RRPBilling;
 use App\Models\RRPType;
 use App\Models\Tenant;
@@ -35,6 +36,11 @@ class Kernel extends ConsoleKernel
                 ])
                 ->first();
 
+                $RRP = RRP::where([
+                    'RRP_ID' => $RRP_Type->RRP_ID
+                ])
+                ->first();
+
                 $User = User::where([
                     'User_List_ID' => $tenant->User_ID
                 ])
@@ -54,7 +60,8 @@ class Kernel extends ConsoleKernel
                     'Amount_Paid' => 0,
                     'Payment_Breakdown' => json_encode($Payment_Breakdown),
                     'Email' => $User->Email,
-                    'Fullname' => $User->Firstname && $User->Lastname ? $User->Firstname." ".$User->Lastname : null
+                    'Fullname' => $User->Firstname && $User->Lastname ? $User->Firstname." ".$User->Lastname : null,
+                    'RRP_Name' => $RRP->RRP_Name
                 ]);
             }
             
