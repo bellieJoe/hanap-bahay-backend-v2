@@ -51,4 +51,15 @@ class RRPBillingController extends Controller
             'Status' => $req->Status
         ]);
     }
+
+    public function getInvoicesByUser_ID($user_id, Request $req){
+        $Invoices = RRPBilling::where([
+            'Tenant_ID' => $user_id
+        ])
+        ->whereMonth('created_at', $req->Month)
+        ->whereYear('created_at', $req->Year)
+        ->get();
+
+        return $Invoices;
+    }
 }
