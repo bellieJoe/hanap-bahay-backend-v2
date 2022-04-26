@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tenant extends Model
+class RRPBilling extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-    protected $table = "tenant_tbl";
-    // protected $primaryKey = "user_id";
+
     protected $guarded = [];
+
+    protected $table = "rrp_billing_tbl";
+    protected $primaryKey = "Bill_ID";
+
 }

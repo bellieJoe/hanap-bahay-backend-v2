@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
-    public function create(Request $req){
+    public static function create(Request $req){
         Notification::create([
             'User_ID' => $req->uid,
             'Date_Notified' => $req->date,

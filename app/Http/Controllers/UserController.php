@@ -44,7 +44,6 @@ class UserController extends Controller
     public function createuserProfile($id){
         UserProfile::create([
             'User_ID' => $id,
-            
         ]);
     }
 
@@ -72,8 +71,13 @@ class UserController extends Controller
     }
 
     public function updateUserDetails_Walkin(Request $request){
-        User::where(['Email', $request->input('Email')])
+        User::where([
+            'Email' =>  $request->input('Email')
+        ])
         ->update([
+            'Firstname' => $request->Firstname,
+            'Middlename' => $request->Middlename,
+            'Lastname' => $request->Lastname,
             'Birthdate' => $request->input('Birthdate'),
             'Address' => $request->input('Address'),
             'Contact_number' => $request->input('Contact_Number'),
@@ -311,7 +315,7 @@ class UserController extends Controller
     public function checkIfRegisteredEmail(Request $req){
         $user = User::where([
             'Email' => $req->input('Email')
-        ])->get();
+        ])->first();
 
         return json_encode($user);
     }
@@ -330,6 +334,19 @@ class UserController extends Controller
             'Is_Boarded' => '1',
             'Registered_By' => 'property owner'
         ]);
+    }
+
+    public function checkUsernameByUsername($username){
+        $User = User::where([
+            'Username' => $username
+        ])->first();
+
+        if(!empty($User)){
+            return json_encode("TAKEN");
+        }
+        else {
+            return json_encode("NOT TAKEN");
+        }
     }
 
 }

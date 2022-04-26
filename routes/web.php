@@ -3,8 +3,11 @@
 use App\Mail\TenantVerificationMail;
 use App\Models\Admin;
 use App\Models\User;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,15 +37,14 @@ require('controller-routes/reservation-update-route.php');
 require('controller-routes/notification-route.php');
 require('controller-routes/img-route.php');
 require('controller-routes/message-route.php');
+require('controller-routes/rrp-type-routes.php');
+require('controller-routes/rrp-billing-route.php');
 
 
 Route::get('/token', function (Request $request) {
     return json_encode($request->session()->token());
 });
 
-Route::get('/testing', function() {
-    return "This is testing";
-});
 
 Route::get("/mail", function() {
     return new App\Mail\VerificationMail(123445, 'Bellie Joe Jandusay');
