@@ -45,9 +45,6 @@ Route::get('/token', function (Request $request) {
     return json_encode($request->session()->token());
 });
 
-Route::get('/testing', function(Request $req) {
-    return Carbon::now()->format("d");
-});
 
 Route::get("/mail", function() {
     return new App\Mail\VerificationMail(123445, 'Bellie Joe Jandusay');

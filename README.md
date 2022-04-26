@@ -1,4 +1,4 @@
 
 php artisan serve
-php artisan schedule:run
+php artisan schedule:work
 php artisan storage:link
